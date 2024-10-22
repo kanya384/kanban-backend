@@ -30,4 +30,18 @@ public class Kanban implements BaseEntity {
 
     @LastModifiedDate
     private LocalDate updatedAt;
+
+    public boolean containsCollaborator(User user) {
+        return collaborators.contains(user);
+    }
+
+    public void addCollaborator(User user) {
+        collaborators.add(user);
+        user.getCollaborated().add(this);
+    }
+
+    public void removeCollaborator(User user) {
+        collaborators.remove(user);
+        user.getCollaborated().remove(this);
+    }
 }

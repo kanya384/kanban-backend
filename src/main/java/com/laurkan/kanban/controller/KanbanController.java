@@ -25,6 +25,7 @@ public class KanbanController {
         User user = userUtils.getCurrentUser();
         return kanbanService.findAllCollaboratedByUserKanbans(user.getId());
     }
+
     @GetMapping("/{id}")
     public KanbanDTO findKanbanById(@PathVariable Long id) {
         return kanbanService.findKanbanById(id);
@@ -39,6 +40,16 @@ public class KanbanController {
     @PutMapping("/{id}")
     public KanbanDTO update(@PathVariable Long id, @Valid @RequestBody KanbanUpdateDTO data) {
         return kanbanService.update(id, data);
+    }
+
+    @PutMapping("/{id}/collaborator/{collaboratorId}")
+    public void addCollaboratorToKanban(@PathVariable("id") Long kanbanId, @PathVariable("collaboratorId") Long collaboratorId) {
+        kanbanService.addCollaboratorToKanban(kanbanId, collaboratorId);
+    }
+
+    @DeleteMapping("/{id}/collaborator/{collaboratorId}")
+    public void removeCollaboratorFromKanban(@PathVariable("id") Long kanbanId, @PathVariable("collaboratorId") Long collaboratorId) {
+        kanbanService.removeCollaboratorFromKanban(kanbanId, collaboratorId);
     }
 
     @DeleteMapping("/{id}")
