@@ -5,13 +5,14 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       dialect: org.hibernate.dialect.PostgreSQL9Dialect
   datasource:
     url: jdbc:postgresql://localhost:5432/kanban
     username: postgres
     password: password
   liquibase:
+    enabled: false
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
 rsa:

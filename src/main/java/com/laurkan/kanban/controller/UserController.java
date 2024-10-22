@@ -2,6 +2,7 @@ package com.laurkan.kanban.controller;
 
 import com.laurkan.kanban.dto.UserCreateDTO;
 import com.laurkan.kanban.dto.UserDTO;
+import com.laurkan.kanban.service.UserService;
 import com.laurkan.kanban.service.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @GetMapping(path = "/{id}")
     public UserDTO findUserById(@PathVariable Long id) {

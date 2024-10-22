@@ -39,6 +39,9 @@ public class User implements BaseEntity, UserDetails {
     @LastModifiedDate
     private LocalDate updatedAt;
 
+    @ManyToMany
+    private List<Kanban> collaborated;
+
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
     private List<Task> assignedTasks = new ArrayList<>();
 

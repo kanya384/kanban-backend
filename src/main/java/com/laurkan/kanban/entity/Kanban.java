@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "kanban")
@@ -21,9 +22,26 @@ public class Kanban implements BaseEntity {
 
     private String title;
 
+    @ManyToMany
+    private List<User> collaborators;
+
     @CreatedDate
     private LocalDate createdAt;
 
     @LastModifiedDate
     private LocalDate updatedAt;
+
+    public boolean containsCollaborator(User user) {
+        return collaborators.contains(user);
+    }
+
+    public void addCollaborator(User user) {
+        collaborators.add(user);
+        user.getCollaborated().add(this);
+    }
+
+    public void removeCollaborator(User user) {
+        collaborators.remove(user);
+        user.getCollaborated().remove(this);
+    }
 }
