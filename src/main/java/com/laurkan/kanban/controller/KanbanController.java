@@ -2,6 +2,7 @@ package com.laurkan.kanban.controller;
 
 import com.laurkan.kanban.dto.KanbanCreateDTO;
 import com.laurkan.kanban.dto.KanbanDTO;
+import com.laurkan.kanban.dto.KanbanDetailedDTO;
 import com.laurkan.kanban.dto.KanbanUpdateDTO;
 import com.laurkan.kanban.entity.User;
 import com.laurkan.kanban.service.KanbanService;
@@ -27,7 +28,7 @@ public class KanbanController {
     }
 
     @GetMapping("/{id}")
-    public KanbanDTO findKanbanById(@PathVariable Long id) {
+    public KanbanDetailedDTO findKanbanById(@PathVariable Long id) {
         return kanbanService.findKanbanById(id);
     }
 

@@ -2,7 +2,9 @@ package com.laurkan.kanban.service;
 
 import com.laurkan.kanban.dto.KanbanCreateDTO;
 import com.laurkan.kanban.dto.KanbanDTO;
+import com.laurkan.kanban.dto.KanbanDetailedDTO;
 import com.laurkan.kanban.dto.KanbanUpdateDTO;
+import com.laurkan.kanban.entity.Kanban;
 
 import java.util.List;
 
@@ -10,7 +12,9 @@ public interface KanbanService {
 
     List<KanbanDTO> findAllCollaboratedByUserKanbans(Long userId);
 
-    KanbanDTO findKanbanById(Long id);
+    KanbanDetailedDTO findKanbanById(Long id);
+
+    Kanban findById(Long id);
 
     KanbanDTO create(KanbanCreateDTO data);
 
