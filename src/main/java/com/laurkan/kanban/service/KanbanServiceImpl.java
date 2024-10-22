@@ -2,7 +2,9 @@ package com.laurkan.kanban.service;
 
 import com.laurkan.kanban.dto.KanbanCreateDTO;
 import com.laurkan.kanban.dto.KanbanDTO;
+import com.laurkan.kanban.dto.KanbanDetailedDTO;
 import com.laurkan.kanban.dto.KanbanUpdateDTO;
+import com.laurkan.kanban.entity.Kanban;
 import com.laurkan.kanban.exception.DuplicateDataException;
 import com.laurkan.kanban.exception.ResourceNotFoundException;
 import com.laurkan.kanban.mapper.KanbanMapper;
@@ -27,10 +29,17 @@ public class KanbanServiceImpl implements KanbanService {
     }
 
     @Override
-    public KanbanDTO findKanbanById(Long id) {
+    public KanbanDetailedDTO findKanbanById(Long id) {
         var kanban = kanbanRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Kanban", id));
-        return kanbanMapper.map(kanban);
+        return kanbanMapper.mapDetailed(kanban);
+    }
+
+    //for StatusMapper mapper
+    @Override
+    public Kanban findById(Long id) {
+        return kanbanRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Kanban", id));
     }
 
     @Override
@@ -46,6 +55,8 @@ public class KanbanServiceImpl implements KanbanService {
                 .orElseThrow(() -> new ResourceNotFoundException("Kanban", id));
 
         kanbanMapper.update(data, kanban);
+
+        kanban = kanbanRepository.save(kanban);
 
         return kanbanMapper.map(kanban);
     }

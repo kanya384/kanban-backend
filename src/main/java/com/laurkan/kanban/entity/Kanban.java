@@ -9,6 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "kanban")
@@ -24,6 +26,10 @@ public class Kanban implements BaseEntity {
 
     @ManyToMany
     private List<User> collaborators;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "kanban_id")
+    private Set<Status> statuses;
 
     @CreatedDate
     private LocalDate createdAt;
@@ -43,5 +49,28 @@ public class Kanban implements BaseEntity {
     public void removeCollaborator(User user) {
         collaborators.remove(user);
         user.getCollaborated().remove(this);
+    }
+
+    public void addStatus(Status status) {
+        statuses.add(status);
+        status.setKanban(this);
+    }
+
+    public void removeStatus(Status status) {
+        statuses.remove(status);
+        status.setKanban(null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Kanban kanban = (Kanban) o;
+        return id == kanban.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
