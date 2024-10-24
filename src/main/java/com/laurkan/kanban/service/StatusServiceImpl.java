@@ -4,6 +4,7 @@ import com.laurkan.kanban.dto.StatusCreateDTO;
 import com.laurkan.kanban.dto.StatusDTO;
 import com.laurkan.kanban.dto.StatusUpdateDTO;
 import com.laurkan.kanban.entity.Kanban;
+import com.laurkan.kanban.entity.Status;
 import com.laurkan.kanban.exception.ResourceNotFoundException;
 import com.laurkan.kanban.mapper.StatusMapper;
 import com.laurkan.kanban.repository.StatusRepository;
@@ -22,6 +23,13 @@ public class StatusServiceImpl implements StatusService {
         var status = statusRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Status", id));
         return statusMapper.map(status);
+    }
+
+    //for TaskMapper mapper
+    @Override
+    public Status findById(Long id) {
+        return statusRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Status", id));
     }
 
     @Override

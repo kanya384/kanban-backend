@@ -6,10 +6,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StatusCreateDTO {
-    @NotNull
-    private Long kanbanId;
-
+public class TaskCreateDto {
     @NotNull
     private String title;
+
+    @NotNull
+    private String content;
+
+    @NotNull
+    private Long statusId;
 }

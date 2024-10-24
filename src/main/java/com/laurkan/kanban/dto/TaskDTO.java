@@ -1,19 +1,23 @@
 package com.laurkan.kanban.dto;
 
+import com.laurkan.kanban.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Getter
 @Setter
-public class StatusDTO {
+public class TaskDTO {
     private long id;
 
     private String title;
 
-    private Set<TaskDTO> tasks;
+    private String content;
+
+    private User assignee;
+
+    private User author;
 
     private LocalDate createdAt;
 
