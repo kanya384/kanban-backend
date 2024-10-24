@@ -1,204 +1,236 @@
 databaseChangeLog:
-- changeSet:
-    id: 1729513109096-1
-    author: laurkan (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: kanban_pkey
-            name: id
-            type: BIGINT
-        - column:
-            constraints:
-              nullable: false
-            name: title
-            type: VARCHAR
-        - column:
-            constraints:
-              nullable: false
-            name: created_at
-            type: date
-        - column:
-            constraints:
-              nullable: false
-            name: updated_at
-            type: date
-        tableName: kanban
-- changeSet:
-    id: 1729513109096-2
-    author: laurkan (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: status_pkey
-            name: id
-            type: BIGINT
-        - column:
-            constraints:
-              nullable: false
-            name: title
-            type: VARCHAR
-        - column:
-            name: kanban_id
-            type: BIGINT
-        - column:
-            constraints:
-              nullable: false
-            name: created_at
-            type: date
-        - column:
-            constraints:
-              nullable: false
-            name: updated_at
-            type: date
-        tableName: status
-- changeSet:
-    id: 1729513109096-3
-    author: laurkan (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: task_pkey
-            name: id
-            type: BIGINT
-        - column:
-            constraints:
-              nullable: false
-            name: title
-            type: VARCHAR
-        - column:
-            constraints:
-              nullable: false
-            name: content
-            type: VARCHAR
-        - column:
-            name: status_id
-            type: BIGINT
-        - column:
-            name: assignee_id
-            type: BIGINT
-        - column:
-            name: author_id
-            type: BIGINT
-        - column:
-            constraints:
-              nullable: false
-            name: created_at
-            type: date
-        - column:
-            constraints:
-              nullable: false
-            name: updated_at
-            type: date
-        tableName: task
-- changeSet:
-    id: 1729513109096-4
-    author: laurkan (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: users_pkey
-            name: id
-            type: BIGINT
-        - column:
-            constraints:
-              nullable: false
-            name: email
-            type: VARCHAR
-        - column:
-            constraints:
-              nullable: false
-            name: password_digest
-            type: VARCHAR
-        - column:
-            constraints:
-              nullable: false
-            name: created_at
-            type: date
-        - column:
-            constraints:
-              nullable: false
-            name: updated_at
-            type: date
-        tableName: users
-- changeSet:
-    id: 1729513109096-5
-    author: laurkan (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: kanban_id
-        baseTableName: status
-        constraintName: status_kanban_id_fkey
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: CASCADE
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: kanban
-        validate: true
-- changeSet:
-    id: 1729513109096-6
-    author: laurkan (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: assignee_id
-        baseTableName: task
-        constraintName: task_assignee_id_fkey
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: SET NULL
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: users
-        validate: true
-- changeSet:
-    id: 1729513109096-7
-    author: laurkan (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: author_id
-        baseTableName: task
-        constraintName: task_author_id_fkey
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: SET NULL
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: users
-        validate: true
-- changeSet:
-    id: 1729513109096-8
-    author: laurkan (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: status_id
-        baseTableName: task
-        constraintName: task_status_id_fkey
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: CASCADE
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: status
-        validate: true
-
+  - changeSet:
+      id: 1729513109096-1
+      author: laurkan
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: users_pkey
+              - column:
+                  name: email
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password_digest
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: date
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: kanban
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: kanban_pkey
+              - column:
+                  name: title
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: owner_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: date
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: owner_id
+            baseTableName: kanban
+            constraintName: kanban_owner_id_fkey
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: users
+            validate: true
+        - createTable:
+            tableName: status
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: status_pkey
+              - column:
+                  name: title
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: kanban_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: date
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: kanban_id
+            baseTableName: status
+            constraintName: status_kanban_id_fkey
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: kanban
+            validate: true
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: task_pkey
+              - column:
+                  name: title
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: assignee_id
+                  type: BIGINT
+              - column:
+                  name: author_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: date
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: assignee_id
+            baseTableName: task
+            constraintName: task_assignee_id_fkey
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: SET NULL
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: users
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: author_id
+            baseTableName: task
+            constraintName: task_author_id_fkey
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: SET NULL
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: users
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: status_id
+            baseTableName: task
+            constraintName: task_status_id_fkey
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: status
+            validate: true
+        - createTable:
+            tableName: kanban_collaborator
+            columns:
+              - column:
+                  name: collaborator_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: kanban_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: collaborator_id, kanban_id
+            constraintName: kanban_collaborator_pkey
+            tableName: kanban_collaborator
+        - addForeignKeyConstraint:
+            baseColumnNames: collaborator_id
+            baseTableName: kanban_collaborator
+            constraintName: kanban_collaborator_colaborator_id_fkey
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: users
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: kanban_id
+            baseTableName: kanban_collaborator
+            constraintName: kanban_collaborator_kanban_id_fkey
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: kanban
+            validate: true

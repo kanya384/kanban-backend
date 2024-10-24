@@ -5,6 +5,7 @@ import com.laurkan.kanban.dto.KanbanDTO;
 import com.laurkan.kanban.dto.KanbanDetailedDTO;
 import com.laurkan.kanban.dto.KanbanUpdateDTO;
 import com.laurkan.kanban.entity.Kanban;
+import com.laurkan.kanban.entity.User;
 import com.laurkan.kanban.exception.DuplicateDataException;
 import com.laurkan.kanban.exception.ResourceNotFoundException;
 import com.laurkan.kanban.mapper.KanbanMapper;
@@ -25,7 +26,7 @@ public class KanbanServiceImpl implements KanbanService {
 
     @Override
     public List<KanbanDTO> findAllCollaboratedByUserKanbans(Long userId) {
-        return kanbanRepository.findByCollaborators(List.of(userId)).stream().map(kanbanMapper::map).toList();
+        return kanbanRepository.findByCollaborator(List.of(userId)).stream().map(kanbanMapper::map).toList();
     }
 
     @Override
@@ -43,8 +44,9 @@ public class KanbanServiceImpl implements KanbanService {
     }
 
     @Override
-    public KanbanDTO create(KanbanCreateDTO data) {
+    public KanbanDTO create(User owner, KanbanCreateDTO data) {
         var kanban = kanbanMapper.map(data);
+        kanban.setOwner(owner);
         kanban = kanbanRepository.save(kanban);
         return kanbanMapper.map(kanban);
     }
