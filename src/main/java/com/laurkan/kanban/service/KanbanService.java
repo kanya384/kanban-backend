@@ -5,6 +5,7 @@ import com.laurkan.kanban.dto.KanbanDTO;
 import com.laurkan.kanban.dto.KanbanDetailedDTO;
 import com.laurkan.kanban.dto.KanbanUpdateDTO;
 import com.laurkan.kanban.entity.Kanban;
+import com.laurkan.kanban.entity.User;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface KanbanService {
 
     Kanban findById(Long id);
 
-    KanbanDTO create(KanbanCreateDTO data);
+    KanbanDTO create(User owner, KanbanCreateDTO data);
 
     KanbanDTO update(Long id, KanbanUpdateDTO data);
 

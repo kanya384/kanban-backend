@@ -25,7 +25,15 @@ public class Kanban implements BaseEntity {
     private String title;
 
     @ManyToMany
-    private List<User> collaborators;
+    @JoinTable(
+            name = "kanban_collaborator",
+            joinColumns = @JoinColumn(name = "kanban_id"),
+            inverseJoinColumns = @JoinColumn(name = "collaborator_id")
+    )
+    private List<User> collaborator;
+
+    @ManyToOne
+    private User owner;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "kanban_id")
@@ -38,16 +46,16 @@ public class Kanban implements BaseEntity {
     private LocalDate updatedAt;
 
     public boolean containsCollaborator(User user) {
-        return collaborators.contains(user);
+        return collaborator.contains(user);
     }
 
     public void addCollaborator(User user) {
-        collaborators.add(user);
+        collaborator.add(user);
         user.getCollaborated().add(this);
     }
 
     public void removeCollaborator(User user) {
-        collaborators.remove(user);
+        collaborator.remove(user);
         user.getCollaborated().remove(this);
     }
 

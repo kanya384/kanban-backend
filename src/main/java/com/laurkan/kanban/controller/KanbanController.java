@@ -35,7 +35,8 @@ public class KanbanController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public KanbanDTO create(@Valid @RequestBody KanbanCreateDTO data) {
-        return kanbanService.create(data);
+        User owner = userUtils.getCurrentUser();
+        return kanbanService.create(owner, data);
     }
 
     @PutMapping("/{id}")

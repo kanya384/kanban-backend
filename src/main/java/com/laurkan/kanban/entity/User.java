@@ -40,7 +40,11 @@ public class User implements BaseEntity, UserDetails {
     @LastModifiedDate
     private LocalDate updatedAt;
 
-    @ManyToMany
+    @OneToMany
+    @JoinColumn(name = "owner_id")
+    private List<Kanban> owned;
+
+    @ManyToMany(mappedBy = "collaborator")
     private List<Kanban> collaborated;
 
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
