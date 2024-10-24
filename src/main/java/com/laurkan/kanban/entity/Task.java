@@ -25,6 +25,9 @@ public class Task {
     private String content;
 
     @ManyToOne
+    private Status status;
+
+    @ManyToOne
     private User assignee;
 
     @ManyToOne
