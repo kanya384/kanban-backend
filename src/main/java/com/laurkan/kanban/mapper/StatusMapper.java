@@ -13,7 +13,7 @@ import org.mapstruct.*;
         componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
-public interface StatusMapper {
+public abstract class StatusMapper {
     @Mapping(source = "kanbanId", target = "kanban")
     public abstract Status map(StatusCreateDTO data);
 

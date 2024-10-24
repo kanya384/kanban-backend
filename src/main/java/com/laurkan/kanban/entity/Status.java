@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -28,11 +29,25 @@ public class Status implements BaseEntity {
     @NotNull
     private Kanban kanban;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "status_id")
+    private Set<Task> tasks;
+
     @CreatedDate
     private LocalDate createdAt;
 
     @LastModifiedDate
     private LocalDate updatedAt;
+
+    public void addTask(Task task) {
+        tasks.add(task);
+        task.setStatus(this);
+    }
+
+    public void removeTask(Task task) {
+        tasks.remove(task);
+        task.setStatus(null);
+    }
 
     @Override
     public boolean equals(Object o) {
