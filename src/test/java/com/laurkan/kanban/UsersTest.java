@@ -51,7 +51,7 @@ public class UsersTest extends BaseTest {
     void testRegisterUserSuccess() throws Exception {
         MockHttpServletResponse responseUser = mockMvc
                 .perform(
-                        post("/user/register", 1)
+                        post("/user/register")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content("{\"name\": \"test03\",\"email\": \"test03@mail.ru\",\"password\": \"password\"}")
                 ).andReturn().getResponse();
@@ -63,7 +63,7 @@ public class UsersTest extends BaseTest {
     void testRegisterUserWithoutNameReturnsBadRequest() throws Exception {
         MockHttpServletResponse responseUser = mockMvc
                 .perform(
-                        post("/user/register", 1)
+                        post("/user/register")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content("{\"email\": \"test04@mail.ru\",\"password\": \"password\"}")
                 ).andReturn().getResponse();
@@ -75,7 +75,7 @@ public class UsersTest extends BaseTest {
     void testRegisterUserWithoutEmailReturnsBadRequest() throws Exception {
         MockHttpServletResponse responseUser = mockMvc
                 .perform(
-                        post("/user/register", 1)
+                        post("/user/register")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content("{\"name\": \"test03\",\"password\": \"password\"}")
                 ).andReturn().getResponse();
@@ -87,7 +87,7 @@ public class UsersTest extends BaseTest {
     void testRegisterUserWithoutPasswordReturnsBadRequest() throws Exception {
         MockHttpServletResponse responseUser = mockMvc
                 .perform(
-                        post("/user/register", 1)
+                        post("/user/register")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content("{\"email\": \"test04@mail.ru\"}")
                 ).andReturn().getResponse();

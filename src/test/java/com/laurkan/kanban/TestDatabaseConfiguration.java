@@ -6,7 +6,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @TestConfiguration
 public class TestDatabaseConfiguration {
 
-    private static final PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer<>("postgres:latest")
+    private static final PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer<>("postgres:17.0")
             .withDatabaseName("test")
             .withUsername("test")
             .withPassword("test");
