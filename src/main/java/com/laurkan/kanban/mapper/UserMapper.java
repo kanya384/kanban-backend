@@ -16,13 +16,14 @@ public abstract class UserMapper {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Mapping(source = "password", target = "passwordDigest")
     public abstract User map(UserCreateDTO dto);
 
     public abstract UserDTO map(User model);
 
     @BeforeMapping
     public void encryptPassword(UserCreateDTO data) {
-        var password = data.getPasswordDigest();
-        data.setPasswordDigest(passwordEncoder.encode(password));
+        var password = data.getPassword();
+        data.setPassword(passwordEncoder.encode(password));
     }
 }

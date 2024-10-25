@@ -1,6 +1,5 @@
 package com.laurkan.kanban.dto;
 
-import com.laurkan.kanban.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +14,9 @@ public class TaskDTO {
 
     private String content;
 
-    private User assignee;
+    private UserDTO assignee;
 
-    private User author;
+    private UserDTO author;
 
     private LocalDate createdAt;
 

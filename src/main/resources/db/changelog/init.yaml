@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1729513109096-1
+      id: 1
       author: laurkan
       changes:
         - createTable:
