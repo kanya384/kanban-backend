@@ -119,6 +119,30 @@ databaseChangeLog:
                   name: updated_at
                   value: "2024-10-24"
         - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: title
+                  value: "task 2"
+              - column:
+                  name: content
+                  value: "content 2"
+              - column:
+                  name: assignee_id
+                  value: "2"
+              - column:
+                  name: author_id
+                  value: "1"
+              - column:
+                  name: status_id
+                  value: "1"
+              - column:
+                  name: created_at
+                  value: "2024-10-24"
+              - column:
+                  name: updated_at
+                  value: "2024-10-24"
+        - insert:
             tableName: kanban_collaborator
             columns:
               - column:

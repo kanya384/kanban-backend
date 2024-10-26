@@ -29,7 +29,7 @@ public class TaskTest extends BaseTest {
                 ).andReturn().getResponse();
         Assertions.assertThat(response.getStatus()).isEqualTo(200);
         Assertions.assertThat(response.getContentAsString())
-                .isEqualTo("{\"id\":1,\"title\":\"status\",\"tasks\":[{\"id\":1,\"title\":\"task\",\"content\":\"content\",\"assignee\":{\"id\":2,\"email\":\"test02@mail.ru\",\"createdAt\":\"2024-10-24\",\"updatedAt\":\"2024-10-24\"},\"author\":{\"id\":1,\"email\":\"test01@mail.ru\",\"createdAt\":\"2024-10-24\",\"updatedAt\":\"2024-10-24\"},\"createdAt\":\"2024-10-24\",\"updatedAt\":\"2024-10-24\"}],\"createdAt\":\"2024-10-24\",\"updatedAt\":\"2024-10-24\"}");
+                .isEqualTo("{\"id\":1,\"title\":\"task\",\"content\":\"content\",\"assignee\":{\"id\":2,\"email\":\"test02@mail.ru\",\"createdAt\":\"2024-10-24\",\"updatedAt\":\"2024-10-24\"},\"author\":{\"id\":1,\"email\":\"test01@mail.ru\",\"createdAt\":\"2024-10-24\",\"updatedAt\":\"2024-10-24\"},\"createdAt\":\"2024-10-24\",\"updatedAt\":\"2024-10-24\"}");
     }
 
     @Test
@@ -43,7 +43,8 @@ public class TaskTest extends BaseTest {
                                 .header("Authorization", "Bearer " + token)
                 ).andReturn().getResponse();
         Assertions.assertThat(response.getStatus()).isEqualTo(201);
-        Assertions.assertThat(response.getContentAsString()).contains("test task - 2");
+        Assertions.assertThat(response.getContentAsString())
+                .isEqualTo("{\"id\":3,\"title\":\"test task - 2\",\"content\":\"content\",\"author\":{\"id\":1,\"email\":\"test01@mail.ru\",\"createdAt\":\"2024-10-24\",\"updatedAt\":\"2024-10-24\"},\"createdAt\":\"2024-10-26\",\"updatedAt\":\"2024-10-26\"}");
     }
 
     @Test

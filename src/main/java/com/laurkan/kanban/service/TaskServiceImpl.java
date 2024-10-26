@@ -4,6 +4,7 @@ import com.laurkan.kanban.dto.TaskCreateDto;
 import com.laurkan.kanban.dto.TaskDTO;
 import com.laurkan.kanban.dto.TaskUpdateDTO;
 import com.laurkan.kanban.entity.Status;
+import com.laurkan.kanban.entity.User;
 import com.laurkan.kanban.exception.ResourceNotFoundException;
 import com.laurkan.kanban.mapper.TaskMapper;
 import com.laurkan.kanban.repository.TaskRepository;
@@ -26,8 +27,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskDTO create(TaskCreateDto data) {
+    public TaskDTO create(User user, TaskCreateDto data) {
         var task = taskMapper.map(data);
+        task.setAuthor(user);
         task = taskRepository.save(task);
         Status status = task.getStatus();
         status.addTask(task);
