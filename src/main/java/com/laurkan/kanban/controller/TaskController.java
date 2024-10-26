@@ -3,7 +3,9 @@ package com.laurkan.kanban.controller;
 import com.laurkan.kanban.dto.TaskCreateDto;
 import com.laurkan.kanban.dto.TaskDTO;
 import com.laurkan.kanban.dto.TaskUpdateDTO;
+import com.laurkan.kanban.entity.User;
 import com.laurkan.kanban.service.TaskService;
+import com.laurkan.kanban.utils.UserUtils;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 public class TaskController {
     private final TaskService taskService;
 
+    private final UserUtils userUtils;
+
     @GetMapping("/{id}")
     public TaskDTO findTaskById(@PathVariable Long id) {
         return taskService.findTaskById(id);
@@ -23,7 +27,8 @@ public class TaskController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TaskDTO create(@Valid @RequestBody TaskCreateDto data) {
-        return taskService.create(data);
+        User user = userUtils.getCurrentUser();
+        return taskService.create(user, data);
     }
 
     @PutMapping("/{id}")

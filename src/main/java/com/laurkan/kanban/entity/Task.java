@@ -33,9 +33,6 @@ public class Task {
     @ManyToOne
     private User author;
 
-    @ManyToOne
-    private User owner;
-
     @CreatedDate
     private LocalDate createdAt;
 

@@ -15,9 +15,10 @@ public class UserCreateDTO {
     private String name;
 
     @Email
+    @NotNull
     private String email;
 
     @Size(min = 8, max = 50)
     @NotNull
-    private String passwordDigest;
+    private String password;
 }

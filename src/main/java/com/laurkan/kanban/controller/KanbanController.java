@@ -45,11 +45,13 @@ public class KanbanController {
     }
 
     @PutMapping("/{id}/collaborator/{collaboratorId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void addCollaboratorToKanban(@PathVariable("id") Long kanbanId, @PathVariable("collaboratorId") Long collaboratorId) {
         kanbanService.addCollaboratorToKanban(kanbanId, collaboratorId);
     }
 
     @DeleteMapping("/{id}/collaborator/{collaboratorId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeCollaboratorFromKanban(@PathVariable("id") Long kanbanId, @PathVariable("collaboratorId") Long collaboratorId) {
         kanbanService.removeCollaboratorFromKanban(kanbanId, collaboratorId);
     }
