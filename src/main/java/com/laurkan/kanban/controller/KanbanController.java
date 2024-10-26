@@ -7,6 +7,8 @@ import com.laurkan.kanban.dto.KanbanUpdateDTO;
 import com.laurkan.kanban.entity.User;
 import com.laurkan.kanban.service.KanbanService;
 import com.laurkan.kanban.utils.UserUtils;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/kanban")
+@Tag(name = "Канбан", description = "Управление сущностями Канбан")
+@SecurityRequirement(name = "JWT")
 public class KanbanController {
     private final KanbanService kanbanService;
     private final UserUtils userUtils;

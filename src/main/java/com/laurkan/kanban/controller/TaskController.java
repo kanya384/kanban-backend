@@ -6,6 +6,8 @@ import com.laurkan.kanban.dto.TaskUpdateDTO;
 import com.laurkan.kanban.entity.User;
 import com.laurkan.kanban.service.TaskService;
 import com.laurkan.kanban.utils.UserUtils;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/task")
+@Tag(name = "Задача", description = "Управление задачами")
+@SecurityRequirement(name = "JWT")
 public class TaskController {
     private final TaskService taskService;
 
