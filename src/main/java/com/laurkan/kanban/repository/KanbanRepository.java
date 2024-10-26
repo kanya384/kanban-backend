@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface KanbanRepository extends JpaRepository<Kanban, Long> {
-    List<Kanban> findByCollaborator(List<Long> userIds);
+    List<Kanban> findByCollaboratorOrOwnerId(List<Long> userIds, Long ownerId);
 }

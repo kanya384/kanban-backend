@@ -26,7 +26,8 @@ public class KanbanServiceImpl implements KanbanService {
 
     @Override
     public List<KanbanDTO> findAllCollaboratedByUserKanbans(Long userId) {
-        return kanbanRepository.findByCollaborator(List.of(userId)).stream().map(kanbanMapper::map).toList();
+        return kanbanRepository.findByCollaboratorOrOwnerId(List.of(userId), userId)
+                .stream().map(kanbanMapper::map).toList();
     }
 
     @Override

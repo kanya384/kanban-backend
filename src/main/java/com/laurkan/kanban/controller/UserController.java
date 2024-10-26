@@ -4,6 +4,7 @@ import com.laurkan.kanban.dto.KanbanDTO;
 import com.laurkan.kanban.dto.UserCreateDTO;
 import com.laurkan.kanban.dto.UserDTO;
 import com.laurkan.kanban.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@Tag(name = "Пользователь", description = "Управление пользователями")
 public class UserController {
     private final UserService userService;
 
