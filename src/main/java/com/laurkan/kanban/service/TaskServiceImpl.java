@@ -54,7 +54,7 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new ResourceNotFoundException("Task", id));
 
         Status status = task.getStatus();
-        status.removeTask(task);
         taskRepository.deleteById(task.getId());
+        status.removeTask(task);
     }
 }
