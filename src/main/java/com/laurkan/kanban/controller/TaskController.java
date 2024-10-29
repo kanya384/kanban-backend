@@ -40,6 +40,11 @@ public class TaskController {
         return taskService.update(id, data);
     }
 
+    @PatchMapping("/{id}/status/{statusId}")
+    public TaskDTO changeStatus(@PathVariable Long id, @PathVariable Long statusId) {
+        return taskService.changeStatus(id, statusId);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
