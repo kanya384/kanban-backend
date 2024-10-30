@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "task")
@@ -24,6 +25,9 @@ public class Task {
     private String content;
 
     @ManyToOne
+    private Status status;
+
+    @ManyToOne
     private User assignee;
 
     @ManyToOne
@@ -34,4 +38,17 @@ public class Task {
 
     @LastModifiedDate
     private LocalDate updatedAt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

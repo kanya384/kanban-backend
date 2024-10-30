@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -38,6 +39,13 @@ public class User implements BaseEntity, UserDetails {
 
     @LastModifiedDate
     private LocalDate updatedAt;
+
+    @OneToMany
+    @JoinColumn(name = "owner_id")
+    private List<Kanban> owned;
+
+    @ManyToMany(mappedBy = "collaborator")
+    private List<Kanban> collaborated;
 
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
     private List<Task> assignedTasks = new ArrayList<>();
@@ -75,5 +83,18 @@ public class User implements BaseEntity, UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

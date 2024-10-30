@@ -1,0 +1,138 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: laurkan
+      comment: "test_data"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "test01@mail.ru"
+              - column:
+                  name: password_digest
+                  value: "$2a$10$1p9qE.a2ID4uYrbsQWCkGOmVL7lgyhN/aV2jjk1vRR5bArhCinrYG"
+              - column:
+                  name: created_at
+                  value: "2024-10-24"
+              - column:
+                  name: updated_at
+                  value: "2024-10-24"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "test02@mail.ru"
+              - column:
+                  name: password_digest
+                  value: "$2a$10$1p9qE.a2ID4uYrbsQWCkGOmVL7lgyhN/aV2jjk1vRR5bArhCinrYG"
+              - column:
+                  name: created_at
+                  value: "2024-10-24"
+              - column:
+                  name: updated_at
+                  value: "2024-10-24"
+        - insert:
+            tableName: kanban
+            columns:
+              - column:
+                  name: title
+                  value: "kanban"
+              - column:
+                  name: owner_id
+                  value: "1"
+              - column:
+                  name: created_at
+                  value: "2024-10-24"
+              - column:
+                  name: updated_at
+                  value: "2024-10-24"
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: title
+                  value: "status"
+              - column:
+                  name: kanban_id
+                  value: "1"
+              - column:
+                  name: created_at
+                  value: "2024-10-24"
+              - column:
+                  name: updated_at
+                  value: "2024-10-24"
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: title
+                  value: "status - 2"
+              - column:
+                  name: kanban_id
+                  value: "1"
+              - column:
+                  name: created_at
+                  value: "2024-10-24"
+              - column:
+                  name: updated_at
+                  value: "2024-10-24"
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: title
+                  value: "task"
+              - column:
+                  name: content
+                  value: "content"
+              - column:
+                  name: assignee_id
+                  value: "2"
+              - column:
+                  name: author_id
+                  value: "1"
+              - column:
+                  name: status_id
+                  value: "1"
+              - column:
+                  name: created_at
+                  value: "2024-10-24"
+              - column:
+                  name: updated_at
+                  value: "2024-10-24"
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: title
+                  value: "task 2"
+              - column:
+                  name: content
+                  value: "content 2"
+              - column:
+                  name: assignee_id
+                  value: "2"
+              - column:
+                  name: author_id
+                  value: "1"
+              - column:
+                  name: status_id
+                  value: "1"
+              - column:
+                  name: created_at
+                  value: "2024-10-24"
+              - column:
+                  name: updated_at
+                  value: "2024-10-24"
+        - insert:
+            tableName: kanban_collaborator
+            columns:
+              - column:
+                  name: collaborator_id
+                  value: "1"
+              - column:
+                  name: kanban_id
+                  value: "1"

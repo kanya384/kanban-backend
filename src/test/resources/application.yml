@@ -1,0 +1,8 @@
+spring:
+  liquibase:
+    contexts: test
+    enabled: true
+    change-log: classpath:/db/changelog/test/test.yaml
+rsa:
+  private-key: classpath:certs/private.pem
+  public-key: classpath:certs/public.pem
