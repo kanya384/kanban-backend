@@ -35,21 +35,6 @@ databaseChangeLog:
                   name: updated_at
                   value: "2024-10-24"
         - insert:
-            tableName: users
-            columns:
-              - column:
-                  name: email
-                  value: "test02@mail.ru"
-              - column:
-                  name: password_digest
-                  value: "$2a$10$1p9qE.a2ID4uYrbsQWCkGOmVL7lgyhN/aV2jjk1vRR5bArhCinrYG"
-              - column:
-                  name: created_at
-                  value: "2024-10-24"
-              - column:
-                  name: updated_at
-                  value: "2024-10-24"
-        - insert:
             tableName: kanban
             columns:
               - column:
