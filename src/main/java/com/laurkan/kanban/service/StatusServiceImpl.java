@@ -57,7 +57,7 @@ public class StatusServiceImpl implements StatusService {
         var status = statusRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Status", id));
         Kanban kanban = status.getKanban();
-        kanban.removeStatus(status);
         statusRepository.deleteById(id);
+        kanban.removeStatus(status);
     }
 }

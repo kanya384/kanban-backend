@@ -49,12 +49,33 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public TaskDTO changeStatus(Long id, Long statusId) {
+        var task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task", id));
+        var oldStatus = task.getStatus();
+
+        var mayBeNewStatus = oldStatus.getKanban().getStatuses()
+                .stream().filter((status) -> status.getId() == statusId).findFirst();
+
+        if (mayBeNewStatus.isEmpty()) {
+            throw new ResourceNotFoundException("Status", id);
+        }
+
+
+        oldStatus.removeTask(task);
+        mayBeNewStatus.get().addTask(task);
+
+        taskRepository.save(task);
+        return taskMapper.map(task);
+    }
+
+    @Override
     public void delete(Long id) {
         var task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task", id));
 
         Status status = task.getStatus();
-        status.removeTask(task);
         taskRepository.deleteById(task.getId());
+        status.removeTask(task);
     }
 }

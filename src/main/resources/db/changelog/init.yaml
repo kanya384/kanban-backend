@@ -19,6 +19,7 @@ databaseChangeLog:
                   type: VARCHAR
                   constraints:
                     nullable: false
+                    unique: true
               - column:
                   name: password_digest
                   type: VARCHAR

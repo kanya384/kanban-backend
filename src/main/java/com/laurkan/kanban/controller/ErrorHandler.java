@@ -4,6 +4,7 @@ import com.laurkan.kanban.dto.ErrorResponse;
 import com.laurkan.kanban.exception.DuplicateDataException;
 import com.laurkan.kanban.exception.ForbiddenException;
 import com.laurkan.kanban.exception.ResourceNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -48,6 +49,12 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleParameterNotValidException(final MissingRequestHeaderException e) {
         return new ErrorResponse(String.format("Ошибка(-и) валидации %s, ошибка %s", e.getHeaderName(), e.getMessage()));
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleDataIntegrityViolationException(final DataIntegrityViolationException e) {
+        return new ErrorResponse(String.format("Ошибка(-и) сохранения в базу: %s", e.getMessage()));
     }
 
     @ExceptionHandler
